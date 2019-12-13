@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StateService } from '@uirouter/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fakeSpotify';
+  constructor(private stateService: StateService) { }
+
+  ngOnInit() {
+  }
 }

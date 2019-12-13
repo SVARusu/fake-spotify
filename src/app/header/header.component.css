@@ -1,0 +1,19 @@
+.header{
+    background: rgb(43, 43, 43);
+    color: white;
+}
+h2{
+    font-size: 25px;
+}
+ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+}
+.menu{
+    width: 400px;;
+}
+.menu li a{
+    color: white;
+}

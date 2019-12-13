@@ -1,0 +1,27 @@
+<div class="header">
+    <div class="container py-2">
+        <div class="row">
+            <div class="col-lg-2">
+                <h2 class="">Fake Spotify</h2>
+            </div>
+            <div class="col-lg-10 d-flex justify-content-end">
+                <div class="menu mt-1">
+                    <ul class="">
+                        <li><a uiSref="home">Home</a></li>
+                        <li><a uiSref="details">Details</a></li>
+                        <li><a href="">Something else</a></li>
+                        <button class="btn btn-primary" (click)="userLogin()">Login</button>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-group mx-center">
+                    <input type="text" class="form-control mr-2 search" placeholder="Search" name="search" [(ngModel)]="search"
+                        (keyup)="searchMusic()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
