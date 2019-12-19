@@ -1,0 +1,19 @@
+.category:hover {
+    opacity: 0.7;
+}
+
+img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.category-name {
+    width: 150px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -1,0 +1,7 @@
+<div class="list-item">
+    <img src="{{track.image}}" alt="">
+    <span class="mx-auto new-release-title">{{ (track.track_name.length>15)? (track.track_name | slice:0:15)+'...':(track.track_name) }}</span>
+    <span class="mx-auto">{{track.artist}} {{ (track.artist.length>15)? (track.artist | slice:0:15)+'...':(track.artist) }}</span>
+    <!-- <span class="mx-auto new-release-title">{{ (item.name.length>15)? (item.name | slice:0:15)+'...':(item.name) }}</span>
+    <span class="mx-auto">{{ (item.artists[0].name.length>15)? (item.artists[0].name | slice:0:15)+'...':(item.artists[0].name) }}</span> -->
+</div>

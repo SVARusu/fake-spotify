@@ -1,19 +1,33 @@
-.header{
-    background: rgb(43, 43, 43);
-    color: white;
-}
-h2{
-    font-size: 25px;
-}
-ul{
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around
-}
 .menu{
     width: 400px;;
 }
 .menu li a{
     color: white;
+}
+.search-res{
+    
+    color: black;
+}
+.list {
+    background: rgb(243, 243, 243);
+    z-index: 10000;
+    position: absolute;
+    width: 1100px;
+    margin-top: 40px;
+    margin-left: 15px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+a {
+    color: black
+}
+.menu-link:hover{
+    background: rgb(224, 224, 224);
+}
+.active {
+    background: rgb(224, 224, 224);
+}
+.login{
+    border-radius: 50px;
+    width: 250px;
 }
