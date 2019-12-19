@@ -1,4 +1,4 @@
-<div class="header">
+<!-- <div class="header">
     <div class="container py-2">
         <div class="row">
             <div class="col-lg-2">
@@ -10,6 +10,7 @@
                         <li><a uiSref="home">Home</a></li>
                         <li><a uiSref="details">Details</a></li>
                         <li><a href="">Something else</a></li>
+                        <button class="btn btn-danger" (click)="testingStuff()">Stuff</button>
                         <button class="btn btn-primary" (click)="userLogin()">Login</button>
                     </ul>
                 </div>
@@ -22,6 +23,38 @@
                         (keyup)="searchMusic()">
                 </div>
             </div>
+            <div class="col-lg-12 list" *ngIf="searchList.length > 0">
+                <div *ngFor="let item of searchList" class="row">
+                    <div class="col-lg-12">
+                        <div class="search-res well">
+                            <h4>{{item.name}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</div> -->
+
+
+<nav class="sidebar">
+    <div class="navbar-header mb-5">
+        <h2>FakeSpotify</h2>
+    </div>
+    <ul class="list-unstyled">
+        <li class="my-2 menu-link">
+            <div class="col-lg-12 d-flex flex-row-reverse">
+                <button class="btn btn-light login" (click)="userLogin()">Login</button>
+            </div>
+        </li>
+        <li class="my-2 menu-link" uiSrefActive="active">
+            <i class="fa fa-home fa-lg"></i><a class="ml-2" uiSref="home" href="">Home</a>
+        </li>
+        <li class="my-2 menu-link" uiSrefActive="active">
+            <i class="fa fa-search fa-lg"></i><a class="ml-2" uiSref="search">Search</a>
+        </li>
+        <li class="my-2 menu-link" uiSrefActive="active">
+            <i class="fa fa-book fa-lg"></i><a class="ml-2">Your Library</a>
+        </li>
+    </ul>
+</nav>

@@ -1,39 +1,101 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+var SpotifyWebApi = require('spotify-web-api-node');
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyService {
+  public spotifyApi;
+  public auth: string = "Bearer " + localStorage.getItem("accessToken");
   constructor(private http: HttpClient) { }
 
+  createSpotifyApi() {
+    //return this.http.get("http://localhost:8080/login");
+    this.http.get("http://localhost:8080/login").subscribe((result: any) => {
+      let win = window.open(result.accessUrl, 'targetWindow', 'toolbar = no, location = no, status = no, menubar = no,scrollbars = yes, resizable = yes, width = 400, height = 400, top = 200, left = 500');
+      let timer = setInterval(() => {
+        if (win.closed) {
+          clearInterval(timer);
+          this.getAccessToken(localStorage.getItem('key'))
+        }
+      }, 500);
+
+    });
+  }
+
+  getAccessToken(code: string) {
+    this.http.get('http://localhost:8080/callback', {
+      params: {
+        code
+      }
+    }).subscribe((response: any) => {
+      console.log(response);
+      localStorage.setItem('accessToken', response.access_token);
+      localStorage.setItem('refreshToken', response.refresh_token);
+      // setTimeout(() => {
+      //   this.refreshToken();
+      // }, 1000);
+      this.refreshToken();
+      setInterval(() => {
+        this.refreshToken();
+      }, 1600000)
+    });
+  }
+
+  refreshToken() {
+    let refresh_token = localStorage.getItem("refreshToken");
+    this.http.get('http://localhost:8080/refresh', { params: { refresh_token } }).subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  getPlaylist() {
+    this.http.get('http://localhost:8080/userinfo').subscribe(result => {
+      console.log(result);
+    })
+  }
   searchSpotify(query: string) {
     let headers = new HttpHeaders({
-      Authorization: "Bearer BQBfVG8eaZGNUxNgIcosMr7TgOZWS8ivTG1xyAAILqOE4Qd8i2yN2LurB69fUDwx7F1gHq7mqGY5H-6FYUTZNUnoz5yRn8um1tOq5k6ZcUf1TPGTgWx5XBJWKTE7Qt8YR1mfl561-CXrQpO_ZY5K1AvEJvH86Z5uUw"
+      Authorization: this.auth
     });
-    let searchStr = "https://api.spotify.com/v1/search?query=" + query + "&offset=0&limit=5&type=artist";
+    let searchStr = "https://api.spotify.com/v1/search?query=" + query + "&offset=0&limit=10&type=track";
+    return this.http.get(searchStr, { headers });
+  }
+  getNewRelease() {
+    let headers = new HttpHeaders({
+      Authorization: this.auth
+    });
+    let searchStr = "https://api.spotify.com/v1/browse/new-releases?country=RO";
     return this.http.get(searchStr, { headers });
   }
 
-  postSpotify(key: string) {
-    let url = "http://localhost:8000/api/token";
-    let data = {
-      Authorization: " Basic YzkyZmVmMDM4M2NjNDZkZGI1YWU3NzE0ZGJlODJhZGU6MzBjMDRlNzVmYjAzNDBjNWI5YjRhOGFkNmU5YWNjNzk=",
-      grant_type: "authorization_code",
-      code: key,
-      redirect_uri: "http://localhost:4200/"
-    };
+  gertArtistTopTracks1() {
     let headers = new HttpHeaders({
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'POST',
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
-      Authorization: " Basic YzkyZmVmMDM4M2NjNDZkZGI1YWU3NzE0ZGJlODJhZGU6MzBjMDRlNzVmYjAzNDBjNWI5YjRhOGFkNmU5YWNjNzk=",
+      Authorization: this.auth
     });
-
-
-    this.http.post(url, data, { headers }).subscribe(map(res => {
-      console.log(res)
-    }))
+    let searchStr = "https://api.spotify.com/v1/artists/43ZHCT0cAZBISjO8DG9PnE/top-tracks?country=US";
+    return this.http.get(searchStr, { headers });
+  }
+  gertArtistTopTracks2() {
+    let headers = new HttpHeaders({
+      Authorization: this.auth
+    });
+    let searchStr = "https://api.spotify.com/v1/artists/43ZHCT0cAZBISjO8DG9PnE/top-tracks?country=UK";
+    return this.http.get(searchStr, { headers });
+  }
+  gertArtistTopTracks3() {
+    let headers = new HttpHeaders({
+      Authorization: this.auth
+    });
+    let searchStr = "https://api.spotify.com/v1/artists/43ZHCT0cAZBISjO8DG9PnE/top-tracks?country=RO";
+    return this.http.get(searchStr, { headers });
+  }
+  getCategories(){
+    let headers = new HttpHeaders({
+      Authorization: this.auth
+    });
+    let searchStr = "https://api.spotify.com/v1/browse/categories";
+    return this.http.get(searchStr, { headers });
   }
 }
 /*
