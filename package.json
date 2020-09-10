@@ -27,7 +27,7 @@
     "chalk": "^3.0.0",
     "font-awesome": "^4.7.0",
     "http": "0.0.0",
-    "http-proxy": "^1.18.0",
+    "http-proxy": "^1.18.1",
     "jquery": "^3.4.1",
     "rxjs": "~6.4.0",
     "spotify-web-api-node": "^4.0.0",
